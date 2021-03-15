@@ -50,8 +50,6 @@ class App extends React.Component {
     ret = axios.get(url);
     ret.then((response)=>{
 
-      //Include code here to check the sentiment and fomrat the data accordingly
-
       this.setState({sentimentOutput:response.data});
       let output = response.data;
       if(response.data === "positive") {
@@ -77,7 +75,13 @@ class App extends React.Component {
     ret = axios.get(url);
 
     ret.then((response)=>{
-      this.setState({sentimentOutput:<EmotionTable emotions={response.data}/>});
+      let listOfEmotions = [];
+      let emotionsTags = Object.keys(response.data);
+      let emotionValues = Object.values(response.data);
+      for(let i in emotionsTags) {
+        listOfEmotions.push([emotionsTags[i],emotionValues[i]]);
+      }
+      this.setState({sentimentOutput:<EmotionTable emotions={listOfEmotions}/>});
   });
   }
   

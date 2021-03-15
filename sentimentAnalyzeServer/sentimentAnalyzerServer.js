@@ -42,12 +42,7 @@ app.get("/url/emotion", (req,res) => {
   }
 
   naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-    let emotions = "emotions -> " +
-      "sadness: " + JSON.stringify(analysisResults.result.emotion.document.emotion.sadness, null, 2) + ", " +
-        "joy: " + JSON.stringify(analysisResults.result.emotion.document.emotion.joy, null, 2) + ", " +
-          "fear: " + JSON.stringify(analysisResults.result.emotion.document.emotion.fear, null, 2) + ", " +
-            "disgust: " + JSON.stringify(analysisResults.result.emotion.document.emotion.disgust, null, 2) + ", " +
-              "anger: " + JSON.stringify(analysisResults.result.emotion.document.emotion.anger, null, 2);
+    let emotions = analysisResults.result.emotion.document.emotion;
     return res.send(emotions);
   }).catch(err => {
     return res.send('error:' + err);
@@ -65,7 +60,7 @@ app.get("/url/sentiment", (req,res) => {
   }
   
   naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-    let sentiment = "sentiment: " + JSON.stringify(analysisResults.result.sentiment.document.label, null, 2);
+    let sentiment = JSON.stringify(analysisResults.result.sentiment.document.label, null, 2);
     return res.send(sentiment);
   }).catch(err => {
     return res.send('error:' + err);
@@ -83,12 +78,7 @@ app.get("/text/emotion", (req,res) => {
   }
 
   naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-    let emotions = "emotions -> " +
-      "sadness: " + JSON.stringify(analysisResults.result.emotion.document.emotion.sadness, null, 2) + ", " +
-        "joy: " + JSON.stringify(analysisResults.result.emotion.document.emotion.joy, null, 2) + ", " +
-          "fear: " + JSON.stringify(analysisResults.result.emotion.document.emotion.fear, null, 2) + ", " +
-            "disgust: " + JSON.stringify(analysisResults.result.emotion.document.emotion.disgust, null, 2) + ", " +
-              "anger: " + JSON.stringify(analysisResults.result.emotion.document.emotion.anger, null, 2);
+    let emotions = analysisResults.result.emotion.document.emotion;
     return res.send(emotions);
   }).catch(err => {
     return res.send('error:' + err);
@@ -107,7 +97,7 @@ app.get("/text/sentiment", (req,res) => {
   }
   
   naturalLanguageUnderstanding.analyze(analyzeParams).then(analysisResults => {
-    let sentiment = "sentiment: " + JSON.stringify(analysisResults.result.sentiment.document.label, null, 2);
+    let sentiment = JSON.stringify(analysisResults.result.sentiment.document.label, null, 2);
     return res.send(sentiment);
   }).catch(err => {
     return res.send('error:' + err);
